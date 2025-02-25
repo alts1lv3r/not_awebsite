@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Go on a Date with Me? ❤️</title>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Great+Vibes&family=Lobster&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script>
+        (function() {
+            emailjs.init("-afYDnriDSD8Xs609"); // Replace with your EmailJS Public Key
+        })();
+
+        function sendEmail(place) {
+            const templateParams = {
+                to_email: "saliring.agnes@gmail.com", // Replace with your actual email
+                subject: "Someone Picked a Date Place! ❤️",
+                message: `They chose: ${place} 😊`
+            };
+
+            emailjs.send("service_qaeweyb", "template_4nyzl35", templateParams)
+                .then(() => {
+                    console.log("Email sent successfully");
+                })
+                .catch(error => {
+                    console.error("Error sending email:", error);
+                });
+
+            // Move to "See ya" screen
+            document.getElementById("places-container").style.display = "none";
+            document.getElementById("see-ya").style.display = "block";
+        }
+
+        function nextStep(step) {
+            document.getElementById(step).style.display = "none";
+            document.getElementById(step + "-next").style.display = "block";
+        }
+
+        function moveNoButton() {
+            const noButton = document.getElementById("no-button");
+            const x = Math.random() * 200 - 100;
+            const y = Math.random() * 200 - 100;
+            noButton.style.transform = `translate(${x}px, ${y}px)`;
+        }
+
+        function showPlaces() {
+            document.getElementById("step1-next-next").style.display = "none"; // Hide the question
+            document.getElementById("places-container").style.display = "block"; // Show places
+        }
+    </script>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #ffe6e6;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+            position: relative;
+        }
+        
+        h1 {
+            font-size: 28px;
+            color: #d63384;
+        }
+
+        /* Specific fonts for each step */
+        #step1 h1 {
+            font-family: 'Great Vibes', cursive;
+            font-size: 96px;
+        }
+
+        #step1-next h1 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 64px;
+        }
+
+        #step1-next-next h1 {
+            font-family: 'Lobster', cursive;
+            font-size: 48px;
+        }
+
+        #places-container h1 {
+            font-family: 'Lobster', cursive;
+            font-size: 48px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        #see-ya h1 {
+            font-family: 'Lobster', cursive;
+            font-size: 72px;
+            color: #ff4081;
+        }
+
+        /* Hide steps except first */
+        .container {
+            display: none;
+        }
+
+        #step1 {
+            display: block;
+        }
+
+        /* Date place selection */
+        .places {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            max-width: 600px;
+            margin: auto;
+            justify-content: center;
+        }
+
+        /* Styled buttons - now all equal size */
+        button {
+            padding: 15px 20px;
+            border-radius: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            background-color: rgb(255, 104, 107);
+            font-weight: bold;
+            color: white;
+            width: 200px;
+            text-align: center;
+        }
+
+        #yes-no-container button {
+            font-size: 20px;
+            padding: 10px 15px;
+            background-color: rgb(255, 104, 107); 
+            font-weight: bold;
+        }
+
+        #no-button {
+            position: relative;
+            transition: transform 0.2s ease;
+        }
+
+        /* Arrow button */
+        .arrow-button {
+            background: none;
+            border: none;
+            font-size: 48px;
+            color: #d63384;
+            cursor: pointer;
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div id="step1" class="container">
+        <h1>Happy Monthsary, my love! ❤️</h1>
+        <button class="arrow-button" onclick="nextStep('step1')">➜</button>
+    </div>
+
+    <div id="step1-next" class="container">
+        <h1>I love you always, in all ways 💖🥰</h1>
+        <button class="arrow-button" onclick="nextStep('step1-next')">➜</button>
+    </div>
+    
+    <div id="step1-next-next" class="container">
+        <h1>Will you go on a date with me? 😊❤️</h1>
+        <div id="yes-no-container">
+            <button onclick="showPlaces()">Yes</button>
+            <button id="no-button" onmouseover="moveNoButton()">No</button>
+        </div>
+    </div>
+    
+    <!-- Step 4: Date Place Selection -->
+    <div id="places-container" class="container">
+        <h1>Which place should we go?</h1>
+        <div class="places">
+            <button onclick="sendEmail('Kamayan sa Manokan')">Kamayan sa Manokan</button>
+            <button onclick="sendEmail('Night Market')">Night Market</button>
+            <button onclick="sendEmail('Jollibee')">Jollibee</button>
+            <button onclick="sendEmail('McDonald\'s')">McDonald's</button>
+            <button onclick="sendEmail('Cafe')">Cafe</button>
+            <button onclick="sendEmail('24 Chicken')">24 Chicken</button>
+            <button onclick="sendEmail('FRKN Burgers')">FRKN Burgers</button>
+            <button onclick="sendEmail('La Paz Batchoy')">La Paz Batchoy</button>
+            <button onclick="sendEmail('Proben')">Proben</button>
+            <button onclick="sendEmail('Rib Shack')">Rib Shack</button>
+            <button onclick="sendEmail('Ramen')">Ramen</button>
+            <button onclick="sendEmail('Dimsum Express')">Dimsum Express</button>
+        </div>
+    </div>
+
+    <!-- Final step: See Ya 😉 -->
+    <div id="see-ya" class="container">
+        <h1>See ya 🫶😉</h1>
+    </div>
+</body>
+</html>
